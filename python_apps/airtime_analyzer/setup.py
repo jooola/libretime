@@ -19,7 +19,7 @@ setup(
         ]
     },
     install_requires=[
-        "mutagen==1.42.0",
+        "mutagen==1.45.1",
         "pika~=1.1.0",
         "file-magic",
         "requests>=2.7.0",
