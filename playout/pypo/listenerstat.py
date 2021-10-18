@@ -8,6 +8,7 @@ import urllib.request
 from datetime import datetime
 from threading import Thread
 
+# Another comment
 import defusedxml.minidom
 from api_clients import version1 as api_client
 
@@ -17,6 +18,7 @@ class ListenerStat(Thread):
     HTTP_REQUEST_TIMEOUT = 30  # 30 second HTTP request timeout
 
     def __init__(self, config, logger=None):
+        # Comment
         Thread.__init__(self)
         self.config = config
         self.api_client = api_client.AirtimeApiClient()

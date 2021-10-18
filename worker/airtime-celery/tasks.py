@@ -9,7 +9,7 @@ from contextlib import closing
 from io import StringIO
 from urllib.parse import urlsplit
 
-import mutagen
+import mutagen as mutagen
 import requests
 from celery import Celery
 from celery.utils.log import get_task_logger

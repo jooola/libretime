@@ -8,6 +8,18 @@ CPU_CORES = $(shell nproc)
 # MYPY_ARG =
 # PYTEST_ARG =
 
+ifdef CI
+MYPY_FORMAT = --no-color-output
+# We change the msg-template because we need an absolute path instead of relative path for CI
+# See .github/annotations/python.json
+# See https://github.com/actions/runner/issues/659
+# See https://github.com/actions/runner/issues/765
+PYLINT_FORMAT = --msg-template='{abspath}:{line}:{column}: {msg_id}: {msg} ({symbol})'
+else
+PYLINT_FORMAT = --output-format=colorized
+PYTEST_FORMAT = --color=yes
+endif
+
 SHARED_DEV_REQUIREMENTS = \
 	black \
 	isort \
@@ -43,17 +55,17 @@ install: venv
 .PHONY: .pylint
 .pylint: $(VENV)
 	source $(VENV)/bin/activate
-	pylint --output-format=colorized $(PYLINT_ARG) || true
+	pylint $(PYLINT_ARG) $(PYLINT_FORMAT) || true
 
 .PHONY: .mypy
 .mypy: $(VENV)
 	source $(VENV)/bin/activate
-	mypy $(MYPY_ARG) || true
+	mypy $(MYPY_ARG) $(MYPY_FORMAT) || true
 
 .PHONY: .pytest
 .pytest: $(VENV)
 	source venv/bin/activate
-	pytest -n $(CPU_CORES) --color=yes -v $(PYTEST_ARG)
+	pytest -n $(CPU_CORES) -v $(PYTEST_ARG) $(PYTEST_FORMAT)
 
 .PHONY: .clean
 .clean:

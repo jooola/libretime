@@ -125,18 +125,28 @@ jobs:
         shell: bash
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+
+      - uses: dorny/paths-filter@v2.2.1
+        id: changes
+        with:
+          filters: |
+            all:
+              - '${{ matrix.context }}/**'
+
+      - if: steps.changes.outputs.all == 'true'
+        uses: actions/cache@v2
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/setup.py') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: Add annotations matchers
-        run: |
-          echo "::add-matcher::.github/annotations/pylint.json"
+      - if: steps.changes.outputs.all == 'true'
+        name: Add annotations matchers
+        run: echo "::add-matcher::.github/matchers/python.json"
 
-      - name: Lint
+      - if: steps.changes.outputs.all == 'true'
+        name: Lint
         run: make lint
         working-directory: ${{ matrix.context }}
 

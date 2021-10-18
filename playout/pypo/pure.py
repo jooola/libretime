@@ -4,6 +4,7 @@ from packaging.version import Version, parse
 
 
 def version_cmp(version1, version2):
+    file = ""
     version1 = parse(version1)
     version2 = parse(version2)
     if version1 > version2:
