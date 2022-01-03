@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 defineProps<{ msg: string }>()
 
 const count = ref(0)
@@ -29,6 +33,7 @@ const count = ref(0)
     </p>
 
     <v-btn @click="count++">count is: {{ count }}</v-btn>
+    <span>{{ t('hello') }}</span>
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test hot module replacement.
