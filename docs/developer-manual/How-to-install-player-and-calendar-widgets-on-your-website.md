@@ -5,10 +5,10 @@ Intro: This LibreTime tutorial is intended for people who are setting up the rad
 
 When you first go to your libretime instance you will see the radio page. Essential the widgets all you to embed the schedule and player from this page on to different web pages using something called an iframe.
 
-So login. 
+So login.
 And now click on Widgets
 The Player will be selected by default.
-You can change the Title but you will need to click select a stream for the changes to be applied to the embeddable code. 
+You can change the Title but you will need to click select a stream for the changes to be applied to the embeddable code.
 
 Now copy the embeddable code to your clipboard.
 
@@ -33,5 +33,3 @@ These widgets rely upon your station libretime instance being publicly accessibl
 The Facebook widget doesn’t currently work and would require you to setup an App Id and possibly debug the code. We might remove it from future versions if nobody spends the time to test and make it working.
 
 Another section of LibreTime that could use some more work is the Station Podcast module under My Podcast. It currently doesn’t work as of the time of this tutorial and we suggest that if you are looking to host a podcast for your station you look into a 3rd party situation or spend some time contributing to test the podcast code.
-
-	

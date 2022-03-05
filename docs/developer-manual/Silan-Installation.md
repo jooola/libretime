@@ -11,7 +11,9 @@ If you are running something older, you should re-install silan from a source yo
 The following solutions have been reported to work. If they do not work, please note that it is your responsibility to get working silan packages.
 
 # Workarounds
+
 ## LibreTime PPA
+
 Works for all relevant Ubuntu releases and installs silan `0.4.0-1ltppa2`
 
 ```bash
@@ -21,6 +23,7 @@ sudo apt-get install silan
 ```
 
 ## Silan from OBS build ([#177 (comment)](https://github.com/LibreTime/libretime/issues/177#issuecomment-299195796))
+
 Works for all relevant Debian and Ubuntu distros and installs silan `0.3.3~nmu1`.
 
 ```bash
@@ -46,7 +49,9 @@ apt-get update
 # install silan 0.3.3 from obs packages
 apt-get install silan
 ```
+
 ## Local armhf builds for Raspberry Pi 3 ([#214 (comment)](https://github.com/LibreTime/libretime/issues/214#issuecomment-305988355))
+
 Since build.opensuse.org can't build Debian packages on arm due to missing dependencies, the `0.3.3~nmu1` arm package was built in a docker crossdev environment. This is reported to work on Debian Jessie on a Raspberry Pi 3 Model B.
 
 ```bash
@@ -56,6 +61,7 @@ sudo dpkg -i silan_0.3.3~nmu1_armhf.deb
 ```
 
 ## Legacy upstream silan packages ([#197](https://github.com/LibreTime/libretime/issues/197))
+
 Legacy upstream hosts patched packages for Ubuntu Trusty on `apt.sourcefabric.org`. They install as `0.3.2~trusty~sfo-1`.
 
 ```bash
@@ -70,9 +76,11 @@ sudo apt-get install --reinstall silan=0.3.2~trusty~sfo-1
 ```
 
 ## Remove silan completely ([#193 (comment)](https://github.com/LibreTime/libretime/issues/193#issuecomment-299174997))
-It is worth mentioning that you can disable cue point detection by removing silan from the system. 
+
+It is worth mentioning that you can disable cue point detection by removing silan from the system.
 
 ```bash
 sudo apt-get uninstall silan
 ```
+
 Reportedly this might have [side effects](https://github.com/LibreTime/libretime/issues/214#issuecomment-305748757).

@@ -21,7 +21,7 @@ Click New User type in a User Name
 and then the same password twice
 and whatever information you want to add, the only other required field is Email and then under user type select Program Manager then click Save.
 
-LibreTime doesnt send automatic notifications about new accounts created so you will need to relay this information to any users you create accounts for.
+LibreTime doesn't send automatic notifications about new accounts created so you will need to relay this information to any users you create accounts for.
 
 If you select DJ as the user type the user will only be able to upload their own tracks and can only schedule shows they are given permission to. See our tutorial on creating shows for more information.
 
@@ -30,7 +30,7 @@ Guest is basically a read-only view that can’t access the track library and ca
 Another important section is the Status Page.
 If everything here has a green check mark here then it means that everything is working.
 
- Now we will explore the Streams section which is the most complex part of the admin and briefly talk about how to secure your Icecast setup which isn’t done by default if you installed from the install script.
+Now we will explore the Streams section which is the most complex part of the admin and briefly talk about how to secure your Icecast setup which isn’t done by default if you installed from the install script.
 
 Under Global you can enable Hardware Audio Output if you are using Libretime to feed an FM transmitter or otherwise want to create analog audio output. If you are doing this there are additional steps that might be necessary depending upon your OS.
 
@@ -65,22 +65,22 @@ sudo nano /etc/icecast2/icecast.xml
 you might need to type in your password again. If it says permission denied you will need to check your credentials or otherwise type su and type in the root password. Once you have access to editing the file you scroll by using the arrow keys.
 
 Be very careful when editing this file as deleting the wrong line or adding an extra unneeded character could cause your stream to not work.
-We just want to change where it says “hackme” to a secure password – this can be a random string of characters or something that you will remember. You generally wont need to type this in again after you save the password in your stream settings.
+We just want to change where it says “hackme” to a secure password – this can be a random string of characters or something that you will remember. You generally won't need to type this in again after you save the password in your stream settings.
 
-If you are using nanoe and you want to try a shortcut you can hold the Ctrl button and then type W and then Ctrl and then R and it should pop up with Search (to replace): 
+If you are using nanoe and you want to try a shortcut you can hold the Ctrl button and then type W and then Ctrl and then R and it should pop up with Search (to replace):
 Type in hackme and then hit enter
 now type in the password you want to use.
 You can either click A for all or go through each change and confirm it. Basically you want to be sure you dont have hackme as a password anywhere.
 Now you can save by holding Ctrl and then hitting the X
 Type Y to save.
 
-Now type 
+Now type
 sudo service icecast2 reload
 and this will restart icecast with your new password.
 This will also shut off your stream until you go back and type in the new password into the Output Streams setting of LibreTime
 Make sure you click additional options and type the source password under password and then your admin username which is admin (unless you changed it) and the password you put in there.
 You can also customize the Stream Name, description, genre and mount point.
-Finally click Save click ok to the pop up and 
+Finally click Save click ok to the pop up and
 you will see a orange box that should turn green if you typed in the right credentials.
 
 If something is wrong you will need to revisit the last steps via SSH and make sure the icecast.xml file wasn’t malformed.
@@ -94,7 +94,7 @@ This will set your default password back to hackme and you should then proceed t
 
 One you have this changed you will also enable the ability to create different streams for instance a low bit rate mobile stream or connect to a 3rd party stream provider.
 
-Once you are done with this if you have the proper Admin username and password you can go to Analytics and then click on Listener Stats and it should show a green OK under Stream Data Collection Status – this means that Libretime will be periodically querying your stream to see how many people are listening at a certain time and you can view these stats over time. 
+Once you are done with this if you have the proper Admin username and password you can go to Analytics and then click on Listener Stats and it should show a green OK under Stream Data Collection Status – this means that Libretime will be periodically querying your stream to see how many people are listening at a certain time and you can view these stats over time.
 
 And so that is all for this rather complex part of libretime setup. Keep in mind Libretime is alpha level software and so there are a lot of things that could be improved such as providing a better way to customize the icecast2 password. So if you are planning on running this as an admin prepare to be familiar with the discourse.libretime.org community and the github.com/libretime/libretime page and feel free to ask for help from the community if you run into any problems.
 

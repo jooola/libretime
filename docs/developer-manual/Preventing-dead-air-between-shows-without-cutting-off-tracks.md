@@ -13,7 +13,7 @@ So we are going to assume that you have upload a number of tracks that have the 
 Click smartblock
 Click the blue New button
 and then type in the name of the smartblock – we will call it Fill Show with Promos
-Now we select Genre and the modifer of is and then type in promo
+Now we select Genre and the modifier of is and then type in promo
 
 Now under Limit to: we select time remaining in show
 
@@ -33,7 +33,7 @@ One is that your promos and PSAs as selected randomly by the software might not 
 
 There are two ways around this. You can add a large number of short variable length tracks in a genre called bumper promos and this will greatly increase the chances that the algorithm will be able to fill as close to the time as possible but you may end up with the same short files playing frequently at the end of every show.
 
-Another option which we will explore here is to have another separate smartblock for sound bridges that will be ambient type of sounds that wont jar the listener when they are cut off. This could be any sort of ambient music, sound effect or even nature sounds. The important thing from a listeners perspective is probably that there isn’t any spoken word parts or singing that could be cut off.
+Another option which we will explore here is to have another separate smartblock for sound bridges that will be ambient type of sounds that won't jar the listener when they are cut off. This could be any sort of ambient music, sound effect or even nature sounds. The important thing from a listeners perspective is probably that there isn’t any spoken word parts or singing that could be cut off.
 
 Make sure you save this smart block and we will create a new smart block called sound bridges.
 We will select Genre is Sound Bridge
@@ -41,7 +41,7 @@ and then set Limit to time remaining in show.
 And now click Advanced options and check the box next to “Allow last track to excceed time limit”.
 You can preview and it should show you the tracks in your database that have the genre set to sound bridge. If you want to be careful to avoid dead air and have a limited number of tracks you can click allow repeated tracks as well. This might end up in the same tracks being played a few times but it will help prevent a scenario where you have dead air.
 
-So now we have these two types of smart blocks we still need to have them automatically scheduled and we should have a reliable way of avoiding dead air in between externally sourced shows of variable length. 
+So now we have these two types of smart blocks we still need to have them automatically scheduled and we should have a reliable way of avoiding dead air in between externally sourced shows of variable length.
 
 This can be done two ways. One they could be added individually to the end of a shows autoloading playlist or we can create a new playlist and assign it to the Outro Playlist so that it is automatically scheduled at the end of every show with an autoloading playlist.
 

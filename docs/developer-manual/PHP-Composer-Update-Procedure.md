@@ -12,4 +12,4 @@ git add composer.lock
 git commit -m 'update php dependencies'
 ```
 
-This should be done as part of any PR that changes `composer.json` 
+This should be done as part of any PR that changes `composer.json`

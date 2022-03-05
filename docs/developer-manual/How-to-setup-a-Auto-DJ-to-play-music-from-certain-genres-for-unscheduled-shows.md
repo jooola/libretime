@@ -13,8 +13,8 @@ One the tracks are uploaded to the system and imported we can now create a smart
 For the purposes of this smart block we want to select 4 random items. We also want to avoid really long tracks that are longer than 10 minutes. So we will add the modifier Length is less than 00:10:00
 and now this smart block will pull 4 smart blocks. Be sure to preview it to make sure that you have some matches in your library. This will also save it.
 
-Now we are going to create a new smart block that plays one promo or station ID. 
-Click smartblock and new and then type in the name promo OR ID and then change the criteria Genre to is promo and now click new modifier and then is TOTHID. 
+Now we are going to create a new smart block that plays one promo or station ID.
+Click smartblock and new and then type in the name promo OR ID and then change the criteria Genre to is promo and now click new modifier and then is TOTHID.
 
 And then change limit to 1 items.
 
@@ -27,9 +27,9 @@ Now this playlist can be dragged into a schedule show to add 3 random jazz songs
 
 This is a quick and easy way for you to manually schedule a large chunk of time. You can also use this as an autoloading playlist.
 
-Lets assign this to a new 3 hour show. Called lots of Jazz. Now lets go under Autoloading Playlist and enable that and in this spot we will check repeat until full. This will mean that the system will keep scheduling this playlist until the show is completely full. The only problem here is that at the end of the show it is almost assured that a track will be cut off. If you are a web station and you just want to schedule music for long lengths of time you can schedule shows that are up to 24 hours long. 
+Lets assign this to a new 3 hour show. Called lots of Jazz. Now lets go under Autoloading Playlist and enable that and in this spot we will check repeat until full. This will mean that the system will keep scheduling this playlist until the show is completely full. The only problem here is that at the end of the show it is almost assured that a track will be cut off. If you are a web station and you just want to schedule music for long lengths of time you can schedule shows that are up to 24 hours long.
 
-On the other hand if you are an FCC licensed station you are required to have top of the hour IDs as close as possible to the top of the hour. In this case the random selection of tracks might not suffice for compliance. 
+On the other hand if you are an FCC licensed station you are required to have top of the hour IDs as close as possible to the top of the hour. In this case the random selection of tracks might not suffice for compliance.
 
 If you have a station ID playlist smartblock in your intro playlist (see previous tutorial linked below) and you have your tracks broken up hourly this shouldn’t be an issue but it still might result in tracks being cut of in the middle.
 
@@ -38,5 +38,3 @@ So the best option currently is to change the music tracks to fill the remaining
 It is possible that we could improve the way the autoloading playlists work in the future, please check out libretime.org for the latest release notes and feel free to ask any questions at our forum at https://discourse.libretime.org
 
 Thanks for tuning in to another libretime tutorial. Our next tutorial will show you how to use autoloading playlists to add show specific underwriting or advertisements.
-
-

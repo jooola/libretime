@@ -11,49 +11,49 @@ If you encounter a `HTTP 502` error while downloading a package, please raise an
 You will need to install [VirtualBox](https://www.virtualbox.org) and may want to consider
 installing [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest) to update the
 guest extensions to match your host system on vagrant up.
-                                                    
+
 ```bash
 vagrant plugin install vagrant-vbguest
-```                          
+```
 
-## Libvirt                                                                                               
-                                                                                                         
+## Libvirt
+
 Setting the libvirt provider up on Ubuntu and Debian is straight-forward,
 using the distribution provided packages. While on
 other distributions it can be built from within vagrant.
-                                                                                                         
+
 If you try run a libvirt provided box after using a VirtualBox one, you will receive an
-error:                  
-                                                    
+error:
+
 ```
-Error while activating network:                                                                          
+Error while activating network:
 Call to virNetworkCreate failed: internal error: Network is already in use by interface vboxnet0.
 ```
-                                                                                                         
-This is fixed by stopping virtualbox and re-creating the vagrant box:                  
-                                                    
-```
-sudo systemctl stop virtualbox 
-vagrant destroy ubuntu-xenial
-vagrant up ubuntu-xenial --provider=libvirt                                                              
-```                                                                                                      
 
-### Debian and Ubuntu                                                                                                                                                                                             
-                                                                                                                                                                                                                  
-```bash                                                                                                                                                                                                           
-sudo apt install vagrant vagrant-libvirt libvirt-daemon-system vagrant-mutate libvirt-dev                                                                                                                         
-sudo usermod -aG libvirt $USER                                                                                                                                                                                    
-                                                                                                                                                                                                                  
-# Reboot                                                                                                                                                                                                          
+This is fixed by stopping virtualbox and re-creating the vagrant box:
+
+```
+sudo systemctl stop virtualbox
+vagrant destroy ubuntu-xenial
+vagrant up ubuntu-xenial --provider=libvirt
+```
+
+### Debian and Ubuntu
+
+```bash
+sudo apt install vagrant vagrant-libvirt libvirt-daemon-system vagrant-mutate libvirt-dev
+sudo usermod -aG libvirt $USER
+
+# Reboot
 
 vagrant box add bento/ubuntu-16.04 --provider=virtualbox
 vagrant mutate bento/ubuntu-16.04 libvirt
-vagrant up ubuntu-xenial --provider=libvirt                                                              
-```                     
+vagrant up ubuntu-xenial --provider=libvirt
+```
 
 ### Other Distributions
-                                                    
-You will need to install [libvirt](https://libvirt.org/) and `vagrant-mutate` and then run                                                                                                                        
+
+You will need to install [libvirt](https://libvirt.org/) and `vagrant-mutate` and then run
 
 ```bash
 vagrant plugin install vagrant-libvirt
@@ -74,7 +74,7 @@ change the default provider if you have multiple installed. This can be done by 
 `--provider=virtualbox` or `--provider=libvirt` as applicable.
 
 ```bash
-git clone https://github.com/libretime/libretime.git 
+git clone https://github.com/libretime/libretime.git
 cd libretime
 vagrant up ubuntu-xenial
 ```
@@ -89,7 +89,7 @@ Before provisioning, you may tweak the following options according to your needs
 # This can help reduce ports conflicts with existing services using these ports.
 export VAGRANT_NO_PORT_FORWARDING=true
 
-# Increase CPU count or dedicated memory for the vagrant virtual machine. 
+# Increase CPU count or dedicated memory for the vagrant virtual machine.
 export VAGRANT_CPUS=4
 export VAGRANT_MEMORY=4096
 vagrant up debian-buster

@@ -1,6 +1,6 @@
 ## Force Push Flow
 
-Here is the git workflow I mostly use when you see me (@hairmare) force pushing. 
+Here is the git workflow I mostly use when you see me (@hairmare) force pushing.
 
 Buyers beware, if something goes wrong I'm ready to `git reflog` my way out of issues.
 
@@ -85,13 +85,13 @@ git rebase master
 git push <forkame> --force-with-lease
 ```
 
-All of this only works when I'm the only one commiting on a branch, if the branch 
-has commits by others I use the *traditional* merge model (unless I'm last in the
+All of this only works when I'm the only one committing on a branch, if the branch
+has commits by others I use the _traditional_ merge model (unless I'm last in the
 chain, then I rebase my stuff, git is complicated in a good way like that).
 
 One last thing.
 
-If anything goes wrong and you realize you want a commit you *lost* due to the rebase,
+If anything goes wrong and you realize you want a commit you _lost_ due to the rebase,
 you can usually still find it in the reflog.
 Learning the reflog is a good idea, it gets you to really know the underbelly of all
 this staging business concerning the git DAG.

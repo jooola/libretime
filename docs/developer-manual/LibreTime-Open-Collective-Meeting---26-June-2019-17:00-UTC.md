@@ -1,4 +1,5 @@
 This meeting occurred in #meetings on https://libretime.slack.com/
+
 # Agenda
 
 1. Welcome
@@ -13,12 +14,12 @@ This meeting occurred in #meetings on https://libretime.slack.com/
 
 ## Present
 
-* @gusaus
-* @robbt
-* @paddatrapper
+- @gusaus
+- @robbt
+- @paddatrapper
 
 ## Decisions
 
-* LibreTime will create a OpenCollective (action @paddatrapper)
-* The @Libretime/opencollective-adminstrators team will manage this OpenCollective and develop policies around reimbursement in consultation with Maintainers and Contributors
-* Initially the OpenCollective Administrators team will consist of @robbt and @paddatrapper
+- LibreTime will create a OpenCollective (action @paddatrapper)
+- The @Libretime/opencollective-adminstrators team will manage this OpenCollective and develop policies around reimbursement in consultation with Maintainers and Contributors
+- Initially the OpenCollective Administrators team will consist of @robbt and @paddatrapper

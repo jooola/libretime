@@ -57,6 +57,6 @@ and update this to version to
     }
 ```
 
-in addition to changing the schema.xml file and regenerating the propel boiler plate classes as described above. If someone notices a conflict when trying to merge a PR that was targetting the same version then you might need to increment.
+in addition to changing the schema.xml file and regenerating the propel boiler plate classes as described above. If someone notices a conflict when trying to merge a PR that was targeting the same version then you might need to increment.
 
 This allows us to keep our database schema changes underneath the same version number while allowing incremental changes to people who are running off of the latest git master.

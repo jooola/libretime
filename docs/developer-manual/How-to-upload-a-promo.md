@@ -1,12 +1,12 @@
 [Video](https://youtu.be/2ssWW8XtN5c)
 
-* Script
-How to upload a promo
+- Script
+  How to upload a promo
 
 Intro:
 This LibreTime tutorial is oriented to DJ users of a already setup Libretime system.
 
- In this tutorial we will explain how you can upload a short promotional segment that will be scheduled automatically between shows and in between music tracks on automatically generated playlists.
+In this tutorial we will explain how you can upload a short promotional segment that will be scheduled automatically between shows and in between music tracks on automatically generated playlists.
 
 To do this you will first need to record a short audio segment and encode it as a an audio file such as a mp3. Once you have this recorded and edited to the appropriate length you can then open up your LibreTime instance and login.
 

@@ -11,12 +11,11 @@ For the purposes of this tutorial we are going to create a smart block called Un
 
 And we will limit to 1 item and preview it a few times and then save it and exit out.
 
-Now we will add to this to the intro playlist we setup earlier. 
+Now we will add to this to the intro playlist we setup earlier.
 Goto playlists and find the intro playlist, if you don’t have one you can create one now.
 Now drag the underwriting announcement smartblock in here. Your intro playlist should probably start with some kind of station ID be it a legal or otherwise followed by this underwriting announcement.
 
 Now lets go to settings and general and make sure that the intro playlist is set to your intro playlist.
-Now every show will begin with a station ID followed by a random underwriting spot and then the content. You can increase the # of spots that are aired. 
+Now every show will begin with a station ID followed by a random underwriting spot and then the content. You can increase the # of spots that are aired.
 
 We are planning to add additional features such as individualized intro playlists for specific shows and a log where you can look up all of the times that a specific track aired in the past. This could be useful for sharing with your underwriters. If you are a web radio or commercial radio station then you could use this to track ads. Additional functionality is planned in the future so keep checking the forum at https://discourse.libretime.org, our website or our github repository at https://github.com/libretime/libretime
-

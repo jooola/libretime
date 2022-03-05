@@ -3,7 +3,7 @@ This is a set of working instructions for Ubuntu Trusty - we will probably enabl
 First install xdebug extension via apt
 `apt-get install php5-xdebug`
 
-Next modify the xdebug.ini file 
+Next modify the xdebug.ini file
 `sudo nano /etc/php5/apache2/conf.d/20-xdebug.ini`
 
 Add the following to the end of the file after zend_extension=xdebug.so

@@ -24,7 +24,7 @@ sudo -u postgres psql -c 'GRANT CONNECT ON DATABASE libretime TO libretime;'
 sudo -u postgres psql -c 'ALTER USER libretime CREATEDB;'
 ```
 
-## Install PHPUnit 
+## Install PHPUnit
 
 PHPUnit should have already been installed when you ran `composer install`. If you have not done so, now is the time to do so.
 
@@ -36,10 +36,11 @@ cd airtime_mvc/tests
 ../../vendor/bin/phpunit
 
 # run a subset of tests
-../../vendor/bin/phpunit --filter testEditReatingShowInstance 
+../../vendor/bin/phpunit --filter testEditReatingShowInstance
 ```
 
 # Python
+
 The python tests are run through nosetest. To prepare your env you should install it.
 
 ```bash
@@ -53,6 +54,7 @@ yum install -y python-nose
 In most cases you need to install deps before the tests can be run.
 
 ## Airtime Analyzer
+
 ```bash
 cd python_apps/airtime_analyzer
 nosetests

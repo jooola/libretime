@@ -3,7 +3,7 @@
 Tutorial Script:
 Welcome to the tutorial on how to broadcast live with LibreTime and Butt
 
-Intro: LibreTime is a radio station automation system designed to empower stations to collaboratively schedule their broadcast day. To do this the broadcast day is divided into different shows and specific DJ users can be given permission to schedule or broadcast during a specific timeframe by being given permissions to a specific show. In most cases LibreTime will be playing out pre-recorded tracks but it also has the ability to allow DJs to stream live remotely from the studio or anywhere with sufficiently fast internet access. The purpose of this tutorial is to show the basics of how to do this from the DJ point of view. If you are looking for how to upload and schedule tracks for your show you can see the previous tutorial in our DJ series. 
+Intro: LibreTime is a radio station automation system designed to empower stations to collaboratively schedule their broadcast day. To do this the broadcast day is divided into different shows and specific DJ users can be given permission to schedule or broadcast during a specific timeframe by being given permissions to a specific show. In most cases LibreTime will be playing out pre-recorded tracks but it also has the ability to allow DJs to stream live remotely from the studio or anywhere with sufficiently fast internet access. The purpose of this tutorial is to show the basics of how to do this from the DJ point of view. If you are looking for how to upload and schedule tracks for your show you can see the previous tutorial in our DJ series.
 
 Streaming live requires that you have either a studio setup that allows you to mix music with your voice or that you use DJ software such as Mixxx that is configured to support both track playback and microphone input. For the purposes of this tutorial we are going to be concentrating on how to stream using the streaming software called Butt(Broadcast using this tool)with your audio setup preconfigured to route the sound you want to play through your soundcard.
 
@@ -18,8 +18,8 @@ now you will need to add your server – if you are using a shared studio comput
 You can also add a specific one for your sure but the settings will save your password and anyone with access to this computer will be able to stream during your show by selecting this.
 
 Otherwise click add to add a new show.
-On this screen we type LibreTime in the name 
-Next we click IceCast 
+On this screen we type LibreTime in the name
+Next we click IceCast
 Then under Address the weburl of your libretime install. Next we will put port 8002 as this is the default port for show users
 Next for password type in the same password you use to login to libretime
 under IceCast mountpoint type in /show

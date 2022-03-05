@@ -5,7 +5,9 @@ Once the release notes are ready and I'm confident that everything looks good th
 The actual release is done through the GitHub web interface by clicking the green publish button. Once the release has been published, the binary is created automatically by GitHub Actions and added to the release notes.
 
 ## Debian packaging
-* See the [libretime-debian-packaging repository](https://github.com/LibreTime/libretime-debian-packaging).
+
+- See the [libretime-debian-packaging repository](https://github.com/LibreTime/libretime-debian-packaging).
 
 ## RPM packaging
-* Is currently done on the *unsupported* OBS [home:radiorabe:airtime OBS repo](https://build.opensuse.org/project/show/home:radiorabe:airtime).
+
+- Is currently done on the _unsupported_ OBS [home:radiorabe:airtime OBS repo](https://build.opensuse.org/project/show/home:radiorabe:airtime).

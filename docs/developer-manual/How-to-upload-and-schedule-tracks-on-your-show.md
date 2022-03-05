@@ -2,7 +2,7 @@
 
 ## Script
 
-DJ tutorial series part 1 
+DJ tutorial series part 1
 How to upload and schedule a track to play on a specific show
 
 Intro:
@@ -32,9 +32,9 @@ The amount of unscheduled time remaining in the show will be displayed on the bo
 
 You can also remove tracks by clicking the checkbox next to them and clicking the Red Remove button. Your station will have an ideal time they want you to aim for on the schedule as there might be intro and outro playlists used to add station specific tracks such as station IDs and promos into your show playlist shortly before it airs. Please contact your station manager or admin to find out what they desire.
 
-Once you are done scheduling you can sit back and enjoy your show. If you want to preview how it sounds you can click the grey speaker icon next to a track. This should open up a Audio Player pop-up on your browser and start playing the tracks. Currently this player doesn’t playback flac files although they will still be played by the LibreTime broadcast. The developers are aware of this bug. 
+Once you are done scheduling you can sit back and enjoy your show. If you want to preview how it sounds you can click the grey speaker icon next to a track. This should open up a Audio Player pop-up on your browser and start playing the tracks. Currently this player doesn’t playback flac files although they will still be played by the LibreTime broadcast. The developers are aware of this bug.
 
-Another way you can find your show and review the tracks or upload new ones is via the Calendar menu. This will be default display the month view of shows and you can find the day your upcoming show airs and click the background of it and a menu should pop-up and you can click Schedule Tracks and this will open up a scheduling window that just contains this specific show. You can add or remove tracks as you would via the Dashboard but it will only be the specific show you chose to schedule. 
+Another way you can find your show and review the tracks or upload new ones is via the Calendar menu. This will be default display the month view of shows and you can find the day your upcoming show airs and click the background of it and a menu should pop-up and you can click Schedule Tracks and this will open up a scheduling window that just contains this specific show. You can add or remove tracks as you would via the Dashboard but it will only be the specific show you chose to schedule.
 
 To see the tracks on past shows that aired you can click on the show and click View. This will display a track list that you won’t be able to preview or edit.
 
