@@ -6,17 +6,14 @@ sidebar_position: 30
 This guide walk you though the steps required to setup a reverse proxy in front of LibreTime.
 
 Setting a reverse proxy in front of LibreTime is recommended, it prevents LibreTime to be
-open to the Internet, adds security by enabling `https` and can hide private ports or urls
-from the public.
+open to the Internet and adds security by enabling `https`.
 
-Using a single place to manage your `ssl/tls` certificates simplify
-their management and will be less prone to errors.
+Setting `ssl/tls` termination on the reverse proxy let's you manage your certificates in
+a single place which is simpler and less prone to errors.
 
 ## Prerequisites
 
-For common setups it is recommended to use 2 domains, one for LibreTime (`radio.example.com`) and one for Icecast (`stream.example.com`).
-
-To enable `https`, you also need a ssl/tls certificate, you can get a certificate from Let's Encrypt by using [Certbot](https://certbot.eff.org/).
+For common setups it is recommended to use 2 domains, one for LibreTime (`radio.example.com`) and one for Icecast (`stream.example.com`). You also need a ssl/tls certificate that you can get from Let's Encrypt by using [Certbot](https://certbot.eff.org/).
 
 You need to identify the location of the services that should be exposed to the public:
 
@@ -36,6 +33,33 @@ Be sure that your firewalls and network configurations allows communications fro
 You can use `ping` to check for network communications, `telnet` to check for open ports and finally `curl` or `wget` to check for http communications.
 
 :::
+
+Here is a schema that illustrate what the reverse proxy will do:
+
+```mermaid
+flowchart TD
+    internet[Internet]
+
+    subgraph internal[Your system or private network]
+        libretime[LibreTime service, listen on libretime:8080]
+        icecast[Icecast service, listen on icecast:8000]
+
+        subgraph proxy[Your reverse proxy]
+            front_http[Listen on *.example.com:80]
+            front_https[Listen on *.example.com:443]
+            front_http -.-> |Redirect to https| front_https
+
+            router[Router]
+            front_https --> |Terminate https| router
+        end
+
+        router --> |If hostname is station.example.com| libretime
+        router --> |If hostname is stream.example.com| icecast
+    end
+
+    internet ==> front_http
+    internet ==> front_https
+```
 
 ## Install a reverse proxy
 
