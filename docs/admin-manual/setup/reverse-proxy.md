@@ -3,7 +3,16 @@ title: Reverse proxy
 sidebar_position: 30
 ---
 
-In some deployments, the LibreTime server is deployed behind a reverse proxy,
+This guide walk you though the steps required to setup a reverse proxy in front of LibreTime.
+
+Setting a reverse proxy in front of LibreTime is recommended, it prevents LibreTime to be
+open to the Internet, adds security by enabling `https` and can hide private ports or urls
+from the public.
+
+Using a single place to manage your `ssl/tls` certificates simplify
+their management and will be less prone to errors.
+
+<!-- In some deployments, the LibreTime server is deployed behind a reverse proxy,
 for example in containerization use-cases such as Docker and LXC. LibreTime
 makes extensive use of its API for some site features, which causes
 [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
@@ -25,29 +34,38 @@ A reverse proxy also allows SSL to be terminated in a single location for multip
 This means that all your traffic to the proxy from clients is encrypted, but the reverse
 proxy's traffic to the containers on the internal network isn't. All the SSL certificates
 live on the reverse proxy and can be renewed there instead of on the individual
-containers.
+containers. -->
 
-### Setup
+## Prerequisites
 
-For SSL redirection to work, you need two domains: one for LibreTime and one for Icecast.
-Here, these will be `libretime.example.com` and `icecast.example.com`.
+For common setups it is recommended to use 2 domains, one for LibreTime (`radio.example.com`) and one for Icecast (`stream.example.com`).
 
-You require two VMs, servers or containers. Alternatively the reverse proxy can
-be located on the server, proxying connections to containers also on the host. Setting up
-a containerization environment is beyond the scope of this guide. It assumes that you have
-Nginx set up on `localhost` and LibreTime will be installed on `192.168.1.10`. You will need root
-access on both. `192.168.1.10` also needs to be able to be accessed from `localhost`
-(`ping 192.168.1.10` on `localhost`).
+To enable `https`, you also need a ssl/tls certificate, you can get a certificate from Let's Encrypt by using [Certbot](https://certbot.eff.org/).
 
-On `192.168.1.10`, install LibreTime as described in the [install guide](./install.md). Once it has installed, replace `<hostname>localhost</hostname>` in
-`/etc/icecast2/icecast.xml` with the following:
+You need to identify the location of the services that should be exposed to the public:
 
-```xml
-<hostname>icecast.example.com</hostname>
-```
+- the LibreTime web server (usually `localhost:8080`, for documentation clarity we use `libretime:8080`),
+- the Icecast server (usually `localhost:8000`, for documentation clarity we use `icecast:8000`).
 
-This is the hostname that people listening to your stream will connect to and what
-LibreTime will use to stream out to them. You will then need to restart Icecast using `sudo systemctl restart icecast2`.
+:::info
+
+If LibreTime is running on the same host as the reverse proxy, you need to change the LibreTime web server default listening port `80` because the reverse proxy needs to listen on the `80`and `443` ports.
+
+:::
+
+:::caution
+
+Be sure that your firewalls and network configurations allows communications from the reverse proxy to the services.
+
+You can use `ping` to check for network communications, `telnet` to check for open ports and finally `curl` or `wget` to check for http communications.
+
+:::
+
+## Install a reverse proxy
+
+### Apache
+
+### Nginx
 
 On `localhost`, run the following:
 
@@ -80,6 +98,19 @@ EOF
 This Nginx configuration ensures that all traffic uses SSL to the reverse proxy, and
 traffic is proxied to `192.168.1.10`.
 
+### HAProxy
+
+## Icecast
+
+Once it has installed, replace `<hostname>localhost</hostname>` in `/etc/icecast2/icecast.xml` with the following:
+
+```xml
+<hostname>icecast.example.com</hostname>
+```
+
+This is the hostname that people listening to your stream will connect to and what
+LibreTime will use to stream out to them. You will then need to restart Icecast using `sudo systemctl restart icecast2`.
+
 Next, the SSL certificate needs to be generated and the site activated.
 
 ```
@@ -108,17 +139,6 @@ needs to be set to true:
 ...
 force_ssl = true
 ```
-
-## SSL Configuration
-
-To increase the security of your server, you can enable encrypted access to the LibreTime administration interface, and direct your users towards this more secure login page. The main advantage of using this encryption is that your remote users' login names and passwords are not sent in plain text across the public Internet or untrusted local networks, such as shared Wi-Fi access points.
-
-## Deploying a certificate with Certbot
-
-One of the fastest, easiest, and cheapest ways to get an SSL certificate is through [Certbot](https://certbot.eff.org/), as created by the
-Electronic Frontier Foundation. To use Certbot, your LibreTime installation must be open to the internet on port 80.
-
-Follow [Certbot's documentation](https://certbot.eff.org/instructions) for your OS and webserver to install an SSL certificate. You'll need to renew the certificate every 90 days to keep your installation secure.
 
 ## Mixed encrypted and unencrypted content
 
