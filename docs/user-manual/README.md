@@ -6,11 +6,15 @@ Welcome to the **LibreTime user manual**, you should find guides and tutorials f
 
 ## Introduction
 
-:construction:
+![Dashboard](./dashboard.png)
 
 ## As manager
 
-:construction:
+- [Plan shows](./manage/schedule.md)
+- [View listeners statistics](./manage/listener-stats.md)
+- [View and export the play history](./manage/listener-stats.md)
+
+- [Show calendar](./manage/calendar.md)
 
 ## As content creator
 
