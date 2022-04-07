@@ -10,6 +10,12 @@ on:
   pull_request:
     branches: [main]
 
+# TODO: rename secrets DEPLOY_SSH_KEY to PREVIEW_DEPLOY_KEY
+env:
+  PREVIEW_EXTERNAL_REPOSITORY: jooola/libretime-preview
+  PREVIEW_URL: https://jooola.github.io
+  PREVIEW_BASE_URL: /libretime-preview/
+
 jobs:
   lint:
     name: Lint
@@ -33,10 +39,14 @@ jobs:
           make -C .github/vale/styles
           vale --output line docs website/src/pages || true
 
-  build:
-    name: Build
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    name: Deploy
     runs-on: ubuntu-latest
     needs: [lint]
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
 
     steps:
       - uses: actions/checkout@v3
@@ -56,26 +66,6 @@ jobs:
         working-directory: website
         run: yarn build
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: website
-          path: website/build
-
-  deploy:
-    if: github.ref == 'refs/heads/main'
-    name: Deploy
-    runs-on: ubuntu-latest
-    needs: [build]
-
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-
-    steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: website
-          path: website/build
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -86,35 +76,49 @@ jobs:
     if: github.event_name == 'pull_request' && github.event.action != 'closed'
     name: Preview
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [lint]
 
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
 
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          name: website
-          path: website/build
+          node-version: "16"
+          cache: yarn
+          cache-dependency-path: ./website/yarn.lock
+
+      - name: Install
+        working-directory: website
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        working-directory: website
+        run: yarn build
+        env:
+          URL: ${{ env.PREVIEW_URL }}
+          BASE_URL: ${{ env.PREVIEW_BASE_URL }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          external_repository: jooola/libretime-preview
+          external_repository: ${{ env.PREVIEW_EXTERNAL_REPOSITORY }}
           deploy_key: ${{ secrets.DEPLOY_SSH_KEY }}
           publish_dir: website/build
           destination_dir: pr-${{ github.event.pull_request.number }}
           keep_files: true
 
-      - name: Update PR preview comment
+      - name: Send PR preview link
         uses: peter-evans/create-or-update-comment@v1.4.5
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            ### Deployment Preview
-            😎 Preview this PR: https://jooola.libretime.io/libretime-preview/pr-${{ github.event.pull_request.number }}
+            ### Deployment preview
+            😎 Preview this PR: ${{ env.PREVIEW_URL }}${{ env.PREVIEW_BASE_URL }}pr-${{ github.event.pull_request.number }}
             🧑🏼‍💻 Commit SHA: ${{ github.sha }}
-          reactions: "rocket"
 
   clean-preview:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -124,7 +128,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: jooola/libretime-preview
+          repository: ${{ env.PREVIEW_EXTERNAL_REPOSITORY }}
           ssh-key: ${{ secrets.DEPLOY_SSH_KEY }}
 
       - name: Clean files
