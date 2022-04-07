@@ -9,6 +9,7 @@ on:
       - docs/**
   pull_request:
     branches: [main]
+    types: [opened, synchronize, closed, reopened]
 
 # TODO: rename secrets DEPLOY_SSH_KEY to PREVIEW_DEPLOY_KEY
 env:
