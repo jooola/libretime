@@ -14,7 +14,7 @@ on:
 env:
   PREVIEW_EXTERNAL_REPOSITORY: jooola/libretime-preview
   PREVIEW_URL: https://jooola.github.io
-  PREVIEW_BASE_URL: /libretime-preview/
+  PREVIEW_BASE_URL: /libretime-preview
 
 jobs:
   lint:
@@ -100,7 +100,7 @@ jobs:
         run: yarn build
         env:
           URL: ${{ env.PREVIEW_URL }}
-          BASE_URL: ${{ env.PREVIEW_BASE_URL }}
+          BASE_URL: ${{ env.PREVIEW_BASE_URL }}/pr-${{ github.event.pull_request.number }}/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -117,7 +117,7 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             ### Deployment preview
-            😎 Preview this PR: ${{ env.PREVIEW_URL }}${{ env.PREVIEW_BASE_URL }}pr-${{ github.event.pull_request.number }}
+            😎 Preview this PR: ${{ env.PREVIEW_URL }}${{ env.PREVIEW_BASE_URL }}/pr-${{ github.event.pull_request.number }}/
             🧑🏼‍💻 Commit SHA: ${{ github.sha }}
 
   clean-preview:
