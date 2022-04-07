@@ -8,6 +8,7 @@ on:
       - website/**
       - docs/**
   pull_request:
+    branches: [main]
 
 jobs:
   lint:
@@ -81,9 +82,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: website/build
 
-  review:
-    if: github.event_name == 'pull_request'
-    name: Review
+  preview:
+    if: github.event_name == 'pull_request' && github.event.action != 'closed'
+    name: Preview
     runs-on: ubuntu-latest
     needs: [build]
 
@@ -94,19 +95,30 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: website
-          path: website/build/pr-${{ github.event.pull_request.number }}
+          path: website/build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: website/build
+          destination_dir: pr-${{ github.event.pull_request.number }}
           external_repository: libretime/libretime.github.io
           keep_files: true
 
-  clean-review:
+      - name: Update PR preview comment
+        uses: peter-evans/create-or-update-comment@v1.4.5
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ### Deployment Preview
+            😎 Preview this PR: https://cicd-demo-app-preview-pr-${{ github.event.pull_request.number }}.azurewebsites.net
+            🧑🏼‍💻 Commit SHA: ${{ github.sha }}
+          reactions: "rocket"
+
+  clean-preview:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    name: Clean review
+    name: Clean preview
     runs-on: ubuntu-latest
 
     steps:
