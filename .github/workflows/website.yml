@@ -83,6 +83,24 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
 
     steps:
+      - name: Find preview link comment
+        uses: peter-evans/find-comment@v2
+        id: link-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-includes: Preview deployment
+
+      - name: Update preview link comment
+        uses: peter-evans/create-or-update-comment@v1.4.5
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-id: ${{ steps.link-comment.outputs.comment-id }}
+          edit-mode: replace
+          body: |
+            ### Preview deployment
+            🔗  Commit SHA: ${{ github.sha }}
+            ⌛  Build in progress
+
       - uses: actions/checkout@v3
 
       - name: Setup Node
@@ -112,14 +130,16 @@ jobs:
           destination_dir: pr-${{ github.event.pull_request.number }}
           keep_files: true
 
-      - name: Send PR preview link
+      - name: Update preview link comment
         uses: peter-evans/create-or-update-comment@v1.4.5
         with:
           issue-number: ${{ github.event.pull_request.number }}
+          comment-id: ${{ steps.link-comment.outputs.comment-id }}
+          edit-mode: replace
           body: |
-            ### Deployment preview
-            😎 Preview this PR: ${{ env.PREVIEW_URL }}${{ env.PREVIEW_BASE_URL }}/pr-${{ github.event.pull_request.number }}/
-            🧑🏼‍💻 Commit SHA: ${{ github.sha }}
+            ### Preview deployment
+            🔗  Commit SHA: ${{ github.sha }}
+            😎  Preview this PR: ${{ env.PREVIEW_URL }}${{ env.PREVIEW_BASE_URL }}/pr-${{ github.event.pull_request.number }}/
 
   clean-preview:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
