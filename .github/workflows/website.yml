@@ -100,10 +100,10 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          external_repository: jooola/libretime-preview
+          deploy_key: ${{ secrets.DEPLOY_SSH_KEY }}
           publish_dir: website/build
           destination_dir: pr-${{ github.event.pull_request.number }}
-          external_repository: libretime/libretime.github.io
           keep_files: true
 
       - name: Update PR preview comment
@@ -112,7 +112,7 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             ### Deployment Preview
-            😎 Preview this PR: https://cicd-demo-app-preview-pr-${{ github.event.pull_request.number }}.azurewebsites.net
+            😎 Preview this PR: https://jooola.libretime.io/libretime-preview/pr-${{ github.event.pull_request.number }}
             🧑🏼‍💻 Commit SHA: ${{ github.sha }}
           reactions: "rocket"
 
@@ -124,7 +124,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: libretime/libretime.github.io
+          repository: jooola/libretime-preview
+          ssh-key: ${{ secrets.DEPLOY_SSH_KEY }}
 
       - name: Clean files
         run: |
