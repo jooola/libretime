@@ -2,7 +2,11 @@ from pathlib import Path
 
 import pytest
 
-from libretime_analyzer.pipeline.analyze_metadata import analyze_metadata
+from libretime_analyzer.pipeline.analyze_metadata import (
+    InvalidFile,
+    InvalidMimeType,
+    analyze_metadata,
+)
 
 from ..fixtures import FILE_INVALID_DRM, FILE_INVALID_TXT, FILES_TAGGED
 
@@ -35,16 +39,17 @@ def test_analyze_metadata(filepath: Path, metadata: dict):
     assert found == metadata
 
 
-def test_analyze_metadata_invalid_wma():
-    metadata = analyze_metadata(str(FILE_INVALID_DRM), {})
-    assert metadata["mime"] == "audio/x-ms-wma"
+@pytest.mark.parametrize(
+    "filepath,exception,match",
+    [
+        (FILE_INVALID_DRM, InvalidMimeType, "invalid mime type: audio/x-ms-wma"),
+        (FILE_INVALID_TXT, InvalidFile, f"no metadata in {FILE_INVALID_TXT}"),
+    ],
+)
+def test_analyze_metadata_invalid_mime_type(filepath, exception, match):
+    with pytest.raises(exception, match=match):
+        analyze_metadata(str(filepath), {})
 
 
-def test_analyze_metadata_unparsable_file():
-    metadata = analyze_metadata(str(FILE_INVALID_TXT), {})
-    assert metadata == {
-        "filesize": 10,
-        "ftype": "audioclip",
-        "hidden": False,
-        "md5": "4d5e4b1c8e8febbd31fa9ce7f088beae",
-    }
+def test_compute_md5():
+    assert compute_md5(FILE_INVALID_TXT) == "4d5e4b1c8e8febbd31fa9ce7f088beae"

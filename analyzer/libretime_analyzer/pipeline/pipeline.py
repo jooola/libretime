@@ -7,7 +7,6 @@ from pydantic import BaseModel
 
 from .analyze_cuepoint import analyze_cuepoint, analyze_duration
 from .analyze_metadata import analyze_metadata
-from .analyze_playability import UnplayableFileError, analyze_playability
 from .analyze_replaygain import analyze_replaygain
 from .organise_file import organise_file
 
@@ -89,7 +88,6 @@ class Pipeline:
             if options.analyze_cue_points:
                 metadata = analyze_cuepoint(audio_file_path, metadata)
             metadata = analyze_replaygain(audio_file_path, metadata)
-            metadata = analyze_playability(audio_file_path, metadata)
 
             metadata = organise_file(
                 audio_file_path,
@@ -102,11 +100,12 @@ class Pipeline:
 
             # Pass all the file metadata back to the main analyzer process
             queue.put(metadata)
-        except UnplayableFileError as exception:
+        except (InvalidMimeType, InvalidFile) as exception:
             logger.exception(exception)
-            metadata["import_status"] = PipelineStatus.FAILED
-            metadata["reason"] = "The file could not be played."
+            metadata["import_status"] = PipelineStatus.failed
+            metadata["reason"] = str(exception)
             raise exception
-        except Exception as exception:
-            logger.exception(exception)
-            raise exception
+        except Exception as e:
+            # Ensures the traceback for this child process gets written to our log files:
+            logger.exception(e)
+            raise e

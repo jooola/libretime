@@ -9,6 +9,18 @@ from libretime_shared.files import compute_md5
 logger = logging.getLogger(__name__)
 
 
+class InvalidFile(Exception):
+    """
+    Raised when a invalid file encountered during metadata analysis.
+    """
+
+
+class InvalidMimeType(Exception):
+    """
+    Raised when a invalid mime type is encountered metadata analysis.
+    """
+
+
 def analyze_metadata(filepath_: str, metadata: Dict[str, Any]):
     """
     Extract audio metadata from tags embedded in the file using mutagen.
@@ -30,6 +42,23 @@ def analyze_metadata(filepath_: str, metadata: Dict[str, Any]):
         return metadata
 
     metadata["mime"] = extracted.mime[0]
+
+    # Validate mime type
+    if metadata["mime"] not in (
+        "audio/aac",
+        "audio/ac3",
+        "audio/flac",
+        "audio/mp3",
+        "audio/mp4",
+        "audio/mpeg",
+        "audio/ogg",
+        "audio/opus",
+        "audio/speex",
+        "audio/vorbis",
+        "audio/wav",
+        "audio/x-wav",
+    ):
+        raise InvalidMimeType(f"invalid mime type: {metadata['mime']}")
 
     info = extracted.info
     if hasattr(info, "sample_rate"):
