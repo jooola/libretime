@@ -1,94 +1,80 @@
 name: Website Preview
 
 on:
-  workflow_dispatch:
-    branches: [main]
-    types: [synchronize, closed, reopened]
-    paths:
-      - .github/workflows/website-preview.yml
-      - website/**
-      - docs/**
-
-  pull_request_review:
-    branches: [main]
-    types: [submitted]
-    # types: [edited, dismissed]
-    paths:
-      - .github/workflows/website-preview.yml
-      - website/**
-      - docs/**
-
-# pull_request_target:
-#   types:
-#     - closed
+  workflow_run:
+    workflows: [Website]
+    types:
+      - completed
 
 env:
   # PREVIEW_DEPLOY_KEY is present in the secrets
-  PREVIEW_EXTERNAL_REPOSITORY: libretime/libretime.github.io
-  PREVIEW_URL: https://libretime.github.io
-  PREVIEW_BASE_URL: /
+  # PREVIEW_EXTERNAL_REPOSITORY: libretime/libretime.github.io
+  PREVIEW_EXTERNAL_REPOSITORY: jooola/libretime-preview
+  # PREVIEW_URL: https://libretime.github.io
+  PREVIEW_URL: https://jooola.github.io
+  # PREVIEW_BASE_URL: /
+  PREVIEW_BASE_URL: /libretime-preview
 
 jobs:
   deploy:
-    if: github.event.review.state == 'approved'
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
     name: Deploy
     runs-on: ubuntu-latest
 
-    environment: website-preview
-
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-
     steps:
-      - name: Find preview link comment
-        uses: peter-evans/find-comment@v2
-        id: found-link-comment
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body-includes: Preview deployment
+      - name: Dump GitHub context
+        run: echo '${{ toJSON(github) }}'
 
-      - name: Update preview link comment
-        uses: peter-evans/create-or-update-comment@v1.4.5
-        id: link-comment
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          comment-id: ${{ steps.found-link-comment.outputs.comment-id }}
-          edit-mode: replace
-          body: |
-            ### Preview deployment ${{ github.sha }}
+      # - name: Find preview link comment
+      #   uses: peter-evans/find-comment@v2
+      #   id: found-link-comment
+      #   with:
+      #     issue-number: ${{ github.event.pull_request.number }}
+      #     body-includes: Preview deployment
 
-            ⌛ Build in progress
+      # - name: Update preview link comment
+      #   uses: peter-evans/create-or-update-comment@v1.4.5
+      #   id: link-comment
+      #   with:
+      #     issue-number: ${{ github.event.pull_request.number }}
+      #     comment-id: ${{ steps.found-link-comment.outputs.comment-id }}
+      #     edit-mode: replace
+      #     body: |
+      #       ### Preview deployment ${{ github.sha }}
 
-            ${{ env.PREVIEW_URL }}${{ env.PREVIEW_BASE_URL }}pr-${{ github.event.pull_request.number }}/
+      #       ⌛ Build in progress
 
-      - uses: actions/checkout@v3
+      #       ${{ env.PREVIEW_URL }}${{ env.PREVIEW_BASE_URL }}pr-${{ github.event.pull_request.number }}/
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-          cache: yarn
-          cache-dependency-path: ./website/yarn.lock
+      # - uses: actions/checkout@v3
 
-      - name: Install
-        working-directory: website
-        run: yarn install --frozen-lockfile
+      # - name: Setup Node
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: "16"
+      #     cache: yarn
+      #     cache-dependency-path: ./website/yarn.lock
 
-      - name: Build
-        working-directory: website
-        run: yarn build
-        env:
-          URL: ${{ env.PREVIEW_URL }}
-          BASE_URL: ${{ env.PREVIEW_BASE_URL }}pr-${{ github.event.pull_request.number }}/
+      # - name: Install
+      #   working-directory: website
+      #   run: yarn install --frozen-lockfile
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          external_repository: ${{ env.PREVIEW_EXTERNAL_REPOSITORY }}
-          deploy_key: ${{ secrets.PREVIEW_DEPLOY_KEY }}
-          publish_dir: website/build
-          destination_dir: pr-${{ github.event.pull_request.number }}
-          keep_files: true
+      # - name: Build
+      #   working-directory: website
+      #   run: yarn build
+      #   env:
+      #     URL: ${{ env.PREVIEW_URL }}
+      #     BASE_URL: ${{ env.PREVIEW_BASE_URL }}pr-${{ github.event.pull_request.number }}/
+
+      # - name: Deploy
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     external_repository: ${{ env.PREVIEW_EXTERNAL_REPOSITORY }}
+      #     deploy_key: ${{ secrets.PREVIEW_DEPLOY_KEY }}
+      #     publish_dir: website/build
+      #     destination_dir: pr-${{ github.event.pull_request.number }}
+      #     keep_files: true
 
       # name: PR approved and labeled
 
@@ -105,43 +91,41 @@ jobs:
       #           run: echo "$GITHUB_CONTEXT"
       #         - run: echo ${{ github.event.review.state }}
 
-      - name: Update preview link comment
-        uses: peter-evans/create-or-update-comment@v1.4.5
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          comment-id: ${{ steps.link-comment.outputs.comment-id }}
-          edit-mode: replace
-          body: |
-            ### Preview deployment ${{ github.sha }}
+      # - name: Update preview link comment
+      #   uses: peter-evans/create-or-update-comment@v1.4.5
+      #   with:
+      #     issue-number: ${{ github.event.pull_request.number }}
+      #     comment-id: ${{ steps.link-comment.outputs.comment-id }}
+      #     edit-mode: replace
+      #     body: |
+      #       ### Preview deployment ${{ github.sha }}
 
-            😎 Deployment is ready!
+      #       😎 Deployment is ready!
 
-            ${{ env.PREVIEW_URL }}${{ env.PREVIEW_BASE_URL }}pr-${{ github.event.pull_request.number }}/
+      #       ${{ env.PREVIEW_URL }}${{ env.PREVIEW_BASE_URL }}pr-${{ github.event.pull_request.number }}/
 
-      - uses: actions-ecosystem/action-add-labels@v1
-        with:
-          labels: preview
+      # - uses: actions-ecosystem/action-add-labels@v1
+      #   with:
+      #     labels: preview
 
-  clean:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    name: Clean
-    runs-on: ubuntu-latest
+  # clean:
+  #   if: github.event_name == 'pull_request' && github.event.action == 'closed'
+  #   name: Clean
+  #   runs-on: ubuntu-latest
 
-    environment: website-preview
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         repository: ${{ env.PREVIEW_EXTERNAL_REPOSITORY }}
+  #         ssh-key: ${{ secrets.PREVIEW_DEPLOY_KEY }}
 
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          repository: ${{ env.PREVIEW_EXTERNAL_REPOSITORY }}
-          ssh-key: ${{ secrets.PREVIEW_DEPLOY_KEY }}
+  #     - name: Clean files
+  #       run: |
+  #         git config --global user.name github-actions
+  #         git config --global user.email github-actions@github.com
 
-      - name: Clean files
-        run: |
-          git config --global user.name github-actions
-          git config --global user.email github-actions@github.com
+  #         rm -fR pr-${{ github.event.pull_request.number }}
 
-          rm -fR pr-${{ github.event.pull_request.number }}
-
-          git add .
-          git commit -m "Clean pr-${{ github.event.pull_request.number }} preview"
-          git push
+  #         git add .
+  #         git commit -m "Clean pr-${{ github.event.pull_request.number }} preview"
+  #         git push
