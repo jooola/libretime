@@ -2,7 +2,7 @@ name: Website Preview
 
 on:
   workflow_run:
-    workflows: [Website]
+    workflows: [website]
     types:
       - completed
 
