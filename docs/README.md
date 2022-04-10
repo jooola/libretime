@@ -11,6 +11,8 @@ Welcome to the **LibreTime documentation**, you should find everything you need 
 
 :::
 
+Some random update.
+
 ## Getting started
 
 **Are you new to LibreTime? This is the place to start!**
