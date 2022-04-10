@@ -60,8 +60,9 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: website-${{ github.ref }}
+          name: website-${{ github.sha }}
           path: website/build
+          retention-days: 1
 
   deploy:
     if: github.ref == 'refs/heads/main'
@@ -73,7 +74,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: website-${{ github.ref }}
+          name: website-${{ github.sha }}
           path: website/build
 
       - name: Deploy
