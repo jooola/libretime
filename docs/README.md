@@ -3,6 +3,8 @@ title: Welcome
 sidebar_position: 10
 ---
 
+Some notable changes!
+
 Welcome to the **LibreTime documentation**, you should find everything you need to know about LibreTime.
 
 :::caution
