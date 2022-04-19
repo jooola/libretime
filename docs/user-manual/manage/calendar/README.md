@@ -1,20 +1,54 @@
 ---
-title: Show calendar
+title: Calendar
 ---
 
-The Calendar page of the LibreTime administration interface has three views: **day**, **week** and **month**, which can be switched using the grey buttons in the top right corner. By default, the **month** view is shown, with today's date highlighted by a pale grey background.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-![](./calendar-screenshot451-calendar.png)
+This guide walk you though the steps required to add, edit or remove shows from the show calendar.
+
+## Calendar browsing
+
+The calendar page has three views: **day**, **week** and **month**, which can be switched using the grey buttons in the top right corner. By default, the **month** view is shown, with today's date highlighted by a pale grey background.
+
+<Tabs>
+<TabItem value="month" label="Month" default>
+
+![](./calendar-view-month.png)
+
+</TabItem>
+<TabItem value="week" label="Week">
+
+![](./calendar-view-week.png)
+
+</TabItem>
+<TabItem value="day" label="Day">
+
+![](./calendar-view-day.png)
+
+</TabItem>
+</Tabs>
 
 In the top left corner of the page, you can go back or forward through the **Calendar** by clicking on the buttons which have a small grey triangle in a white circle. Click the **today** button to jump to today's date in the current view. (The **today** button will be greyed out if you are already viewing that date). In the **day** or **week** views, there is also a drop-down menu which allows you to set the resolution displayed for the calendar, ranging from one minute per row to sixty minutes per row.
 
-![](./calendar-screenshot452-calendar_resolution.png)
+![](./calendar-resolution.png)
 
 ### Editing a show
 
 Show configuration and metadata can be changed at any time, except for **Date/Time Start** and **Record from Line In?** options, which are fixed after broadcast of that show commences. Click the show in the Calendar, and select **Edit Show** from the pop-up context menu. This opens the **Update Show** box, which is almost exactly the same as the **Add this Show** box. Click the **+ Update show** button at the top or bottom of the box when you are done.
 
+<Tabs>
+<TabItem value="edit-show" label="Edit show" default>
+
 ![](./calendar-screenshot459-update_show.png)
+
+</TabItem>
+<TabItem value="edit-show-instance" label="Edit show instance">
+
+![](./calendar-view-week.png)
+
+</TabItem>
+</Tabs>
 
 Episodes of repeating shows also have an **Instance Description** field in which you can add details for that particular episode. Click the episode in the Calendar, click **Edit** on the pop-up menu, then click **Edit this instance**. After entering an Instance Description, click the **+ Update show** button.
 

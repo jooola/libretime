@@ -10,9 +10,8 @@ Welcome to the **LibreTime user manual**, you should find guides and tutorials f
 
 ## As manager
 
-- [Plan shows](./manage/schedule.md)
 - [View listeners statistics](./manage/listener-stats.md)
-- [View and export the play history](./manage/listener-stats.md)
+- [View and export the play history](./manage/playout-history.md)
 
 - [Show calendar](./manage/calendar.md)
 
