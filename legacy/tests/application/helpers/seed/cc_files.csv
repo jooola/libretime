@@ -1,0 +1,8 @@
+id,mime,ftype,directory,filepath,mtime,utime,track_title,bit_rate,sample_rate,length,channels,genre,label,owner_id,file_exists,hidden,silan_check,is_scheduled,is_playlist,filesize,album_title
+1,audio/mp3,audioclip,1,imported/1/oneminute.mp3,2017-08-06 04:27:36,2017-08-06 04:26:47,oneminute.mp3,320000,44100,00:01:00,2,test,nada,1,t,f,f,f,f,2586748,
+2,audio/mp3,audioclip,1,imported/1/fiveminute.mp3,2017-08-06 04:28:36,2017-08-06 04:27:47,fiveminute.mp3,320000,44100,00:05:00,2,test,nada,1,t,f,f,f,f,5126748,
+3,audio/mp3,audioclip,1,imported/1/track1.mp3,2017-08-06 04:28:36,2017-08-06 04:27:47,track1,320000,44100,00:01:30,2,test,nada,1,t,f,f,f,f,5126748,album1
+4,audio/mp3,audioclip,1,imported/1/track2.mp3,2017-08-06 04:28:36,2017-08-06 04:27:47,track2,320000,44100,00:01:30,2,test,nada,1,t,f,f,f,f,5126748,album1
+5,audio/mp3,audioclip,1,imported/1/track3.mp3,2017-08-06 04:28:36,2017-08-06 04:27:47,track3,320000,44100,00:01:30,2,test,nada,1,t,f,f,f,f,5126748,album1
+6,audio/mp3,audioclip,1,imported/1/track1-2.mp3,2017-08-06 05:28:36,2017-08-16 04:27:47,track1,320000,44100,00:01:30,2,test,nada,1,t,f,f,f,f,5126748,album2
+7,audio/mp3,audioclip,1,imported/1/track2-2.mp3,2017-08-06 04:28:36,2017-08-06 04:27:47,track2,320000,44100,00:01:30,2,test,nada,1,t,f,f,f,f,5126748,album2

@@ -1,0 +1,2 @@
+id,name,url,genre,description,color,background_color,live_stream_using_airtime_auth,live_stream_using_custom_auth,live_stream_user,live_stream_pass,linked,is_linkable,image_path,has_autoplaylist,autoplaylist_id,autoplaylist_repeat
+1,test show,,,,ffffff,364492,false,false,,,false,true,,false,,false

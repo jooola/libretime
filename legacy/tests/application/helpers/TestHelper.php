@@ -37,22 +37,6 @@ class TestHelper
         );
     }
 
-    public static function installTestDatabase()
-    {
-        // We need to load the config before our app bootstrap runs. The config
-        // is normally
-        $CC_CONFIG = Config::getConfig();
-
-        $dbhost = $CC_CONFIG['dsn']['host'];
-        $dbport = $CC_CONFIG['dsn']['port'];
-        $dbname = $CC_CONFIG['dsn']['database'];
-        $dbuser = $CC_CONFIG['dsn']['username'];
-        $dbpasswd = $CC_CONFIG['dsn']['password'];
-
-        AirtimeInstall::createDatabase();
-        AirtimeInstall::CreateDatabaseTables($dbuser, $dbpasswd, $dbname, $dbhost, $dbport);
-    }
-
     public static function setupZendBootstrap()
     {
         $application = new Zend_Application(APPLICATION_ENV, CONFIG_PATH . '/application.ini');

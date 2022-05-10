@@ -63,3 +63,8 @@ require_once 'libretime/propel1/runtime/lib/Propel.php';
 Propel::init('../application/configs/airtime-conf-production.php');
 
 Zend_Session::start();
+
+echo 'Creating user!' . PHP_EOL;
+DatabaseHelper::createUser();
+echo 'Creating template database!' . PHP_EOL;
+DatabaseHelper::createTemplateDatabase();
