@@ -24,11 +24,11 @@ setup(
         ]
     },
     install_requires=[
+        "celery==4.4.7",
         "django-filter>=2.4.0,<22.2",
         "django>=4.1.4,<4.2",
         "djangorestframework>=3.12.1,<3.15",
         "drf-spectacular>=0.22.1,<0.26",
-        "requests>=2.25.1,<2.29",
     ],
     extras_require={
         "prod": [
