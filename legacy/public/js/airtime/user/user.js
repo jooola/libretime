@@ -81,17 +81,18 @@ function rowCallback(nRow, aData, iDisplayIndex) {
       });
   }
 
-  if (aData["type"] == "A") {
-    $("td:eq(3)", nRow).html($.i18n._("Admin"));
-  } else if (aData["type"] == "H") {
-    $("td:eq(3)", nRow).html($.i18n._("DJ"));
-  } else if (aData["type"] == "G") {
-    $("td:eq(3)", nRow).html($.i18n._("Guest"));
-  } else if (aData["type"] == "P") {
-    $("td:eq(3)", nRow).html($.i18n._("Program Manager"));
-  } else if (aData["type"] == "S") {
-    $("td:eq(3)", nRow).html($.i18n._("Super Admin"));
-    $("td:eq(4)", nRow).html(""); //Disable deleting the super admin
+  if (aData['type'] == "A") {
+    $('td:eq(3)', nRow).html($.i18n._('Admin'));
+    $('td:eq(4)', nRow).html(""); //Disable deleting the super admin
+  } else if (aData['type'] == "H") {
+    $('td:eq(3)', nRow).html($.i18n._('DJ'));
+  } else if (aData['type'] == "G") {
+    $('td:eq(3)', nRow).html($.i18n._('Guest'));
+  } else if (aData['type'] == "P") {
+    $('td:eq(3)', nRow).html($.i18n._('Program Manager'));
+  } else if (aData['type'] == "S") {
+    $('td:eq(3)', nRow).html($.i18n._('Super Admin'));
+    $('td:eq(4)', nRow).html(""); //Disable deleting the super admin
   }
 
   return nRow;
@@ -161,10 +162,10 @@ function assignUserRightsToUserTypes() {
         $(this).attr(
           "user-rights",
           $.i18n._("Guests can do the following:") +
-            "<br><br>" +
-            $.i18n._("View schedule") +
-            "<br>" +
-            $.i18n._("View show content")
+          "<br><br>" +
+          $.i18n._("View schedule") +
+          "<br>" +
+          $.i18n._("View show content")
         );
         break;
       case "H":
@@ -172,18 +173,18 @@ function assignUserRightsToUserTypes() {
         $(this).attr(
           "user-rights",
           $.i18n._("DJs can do the following:") +
-            "<br><br>" +
-            $.i18n._("View schedule") +
-            "<br>" +
-            $.i18n._("View show content") +
-            "<br>" +
-            $.i18n._("Manage assigned show content") +
-            "<br>" +
-            $.i18n._("Import media files") +
-            "<br>" +
-            $.i18n._("Create playlists, smart blocks, and webstreams") +
-            "<br>" +
-            $.i18n._("Manage their own library content")
+          "<br><br>" +
+          $.i18n._("View schedule") +
+          "<br>" +
+          $.i18n._("View show content") +
+          "<br>" +
+          $.i18n._("Manage assigned show content") +
+          "<br>" +
+          $.i18n._("Import media files") +
+          "<br>" +
+          $.i18n._("Create playlists, smart blocks, and webstreams") +
+          "<br>" +
+          $.i18n._("Manage their own library content")
         );
         break;
       case "P":
@@ -191,18 +192,18 @@ function assignUserRightsToUserTypes() {
         $(this).attr(
           "user-rights",
           $.i18n._("Program Managers can do the following:") +
-            "<br><br>" +
-            $.i18n._("View schedule") +
-            "<br>" +
-            $.i18n._("View and manage show content") +
-            "<br>" +
-            $.i18n._("Schedule shows") +
-            "<br>" +
-            $.i18n._("Import media files") +
-            "<br>" +
-            $.i18n._("Create playlists, smart blocks, and webstreams") +
-            "<br>" +
-            $.i18n._("Manage all library content")
+          "<br><br>" +
+          $.i18n._("View schedule") +
+          "<br>" +
+          $.i18n._("View and manage show content") +
+          "<br>" +
+          $.i18n._("Schedule shows") +
+          "<br>" +
+          $.i18n._("Import media files") +
+          "<br>" +
+          $.i18n._("Create playlists, smart blocks, and webstreams") +
+          "<br>" +
+          $.i18n._("Manage all library content")
         );
         break;
       case "A":
@@ -210,32 +211,32 @@ function assignUserRightsToUserTypes() {
         $(this).attr(
           "user-rights",
           $.i18n._("Admins can do the following:") +
-            "<br><br>" +
-            $.i18n._("Manage preferences") +
-            "<br>" +
-            $.i18n._("Manage users") +
-            "<br>" +
-            $.i18n._("Manage watched folders") +
-            "<br>" +
-            $.i18n._("Send support feedback") +
-            "<br>" +
-            $.i18n._("View system status") +
-            "<br>" +
-            $.i18n._("Access playout history") +
-            "<br>" +
-            $.i18n._("View listener stats") +
-            "<br>" +
-            $.i18n._("View schedule") +
-            "<br>" +
-            $.i18n._("View and manage show content") +
-            "<br>" +
-            $.i18n._("Schedule shows") +
-            "<br>" +
-            $.i18n._("Import media files") +
-            "<br>" +
-            $.i18n._("Create playlists, smart blocks, and webstreams") +
-            "<br>" +
-            $.i18n._("Manage all library content")
+          "<br><br>" +
+          $.i18n._("Manage preferences") +
+          "<br>" +
+          $.i18n._("Manage users") +
+          "<br>" +
+          $.i18n._("Manage watched folders") +
+          "<br>" +
+          $.i18n._("Send support feedback") +
+          "<br>" +
+          $.i18n._("View system status") +
+          "<br>" +
+          $.i18n._("Access playout history") +
+          "<br>" +
+          $.i18n._("View listener stats") +
+          "<br>" +
+          $.i18n._("View schedule") +
+          "<br>" +
+          $.i18n._("View and manage show content") +
+          "<br>" +
+          $.i18n._("Schedule shows") +
+          "<br>" +
+          $.i18n._("Import media files") +
+          "<br>" +
+          $.i18n._("Create playlists, smart blocks, and webstreams") +
+          "<br>" +
+          $.i18n._("Manage all library content")
         );
         break;
     }
