@@ -126,6 +126,9 @@ class File(models.Model):
     class Meta:
         managed = False
         db_table = "cc_files"
+        indexes = [
+            models.Index(fields=["md5"], name="cc_files_md5_idx"),
+        ]
         permissions = [
             ("change_own_file", "Change the files where they are the owner"),
             ("delete_own_file", "Delete the files where they are the owner"),
