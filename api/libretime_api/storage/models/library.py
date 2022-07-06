@@ -4,8 +4,6 @@ from django.db import models
 class Library(models.Model):
     name = models.CharField(
         max_length=255,
-        blank=True,
-        null=True,
         db_column="type_name",
     )
     code = models.CharField(max_length=16, unique=True)
