@@ -1,0 +1,48 @@
+# THIS FILE IS AUTO GENERATED. PLEASE DO NOT EDIT!
+###########################################################
+# The ignore() lines are to squash unused variable warnings
+
+{# settings.log.file.set(true)
+settings.log.file.path.set("{{ log_filepath }}") #}
+
+settings.server.socket.set(true)
+settings.server.socket.path.set("{{ socket_filepath }}")
+
+interactive.persistent("{{ vars_filepath }}")
+
+settings.harbor.bind_addrs.set(["{{ live_inputs_listen_address }}"])
+
+{% if prometheus_enabled -%}
+settings.prometheus.server.set(true)
+settings.prometheus.server.port.set({{ prometheus_listen_port }})
+
+{%- endif %}
+icecast_outputs = ref([
+    {% if icecast_outputs -%}
+    {% for output in icecast_outputs -%}
+    {
+        id = "{{ output.id }}",
+        enabled = {{ output.enabled | lower }},
+        # Meta
+        name = "{{ output.name }}",
+        description = "{{ output.description }}",
+        url = "{{ output.url }}",
+        genre = "{{ output.genre }}",
+        # Audio
+        audio_type = "{{ output.audio_type }}",
+        audio_channels = "{{ output.audio_channels }}",
+        audio_bitrate = "{{ output.audio_bitrate }}",
+        # Icecast
+        icecast_host = "{{ output.icecast_host }}",
+        icecast_port = "{{ output.icecast_port }}",
+        icecast_mount = "{{ output.icecast_mount }}",
+        # Icecast Auth
+        icecast_admin_user = "{{ output.icecast_admin_user }}",
+        icecast_admin_password = "{{ output.icecast_admin_password }}"
+    },
+    {%- endfor %}
+    {%- endif %}
+])
+ignore(icecast_outputs)
+
+%include "{{ run_filepath }}"

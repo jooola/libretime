@@ -1,0 +1,45 @@
+# THIS FILE IS AUTO GENERATED. PLEASE DO NOT EDIT!
+###########################################################
+# The ignore() lines are to squash unused variable warnings
+
+{% for source in sources %}
+# Source {{ loop.index }}
+{{ loop.index }}_enable = {{ source.enabled }}
+{{ loop.index }}_output = "{{ source.output }}"
+{{ loop.index }}_liquidsoap_error = "{{ source.status }}"
+
+{{ loop.index }}_name = "{{ source.name }}"
+{{ loop.index }}_genre = "{{ source.genre }}"
+{{ loop.index }}_description = "{{ source.description }}"
+{{ loop.index }}_url = "{{ source.url }}"
+
+{{ loop.index }}_type = "{{ source.audio_type }}"
+{{ loop.index }}_channels = "{{ source.audio_channels }}"
+{{ loop.index }}_bitrate = {{ source.audio_bitrate }}
+{{ loop.index }}_mobile = {{ source.is_mobile }}
+
+{{ loop.index }}_host = "{{ source.icecast_host }}"
+{{ loop.index }}_port = {{ source.icecast_port }}
+{{ loop.index }}_mount = "{{ source.icecast_mount }}"
+
+{{ loop.index }}_user = "{{ source.icecast_user }}"
+{{ loop.index }}_pass = "{{ source.icecast_password }}"
+{{ loop.index }}_admin_user = "{{ source.icecast__admin_user }}"
+{{ loop.index }}_admin_pass = "{{ source.icecast__admin_password }}"
+
+{% endfor %}
+
+master_live_stream_mp = "{{ master_live_stream_mount }}"
+master_live_stream_port = {{ master_live_stream_port }}
+
+dj_live_stream_mp = "{{ master_live_stream_mount }}"
+dj_live_stream_port = {{ show_live_stream_port }}
+
+icecast_vorbis_metadata = {{ icecast_vorbis_metadata }}
+
+off_air_meta = {{ off_air_meta }}
+output_sound_device = {{ output_sound_device }}
+output_sound_device_type = "{{ output_sound_device_type }}"
+
+log_file = "{{ log_filepath }}"
+auth_path = "{{ auth_command }}"
