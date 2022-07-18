@@ -1,0 +1,36 @@
+inputs:
+  main:
+    enabled: true
+    url: https://radio.org:8001/main
+    connection:
+      kind: icecast
+      mount: /main
+      port: 8001
+      username: source
+      password: password
+
+  show:
+    enabled: true
+    url: https://radio.org:8002/show
+    connection:
+      kind: icecast
+      mount: /show
+      port: 8002
+
+outputs:
+  - enabled: true
+    url: https://radio.org/main.m3u8
+    connection:
+      kind: hls
+      playlist: main.m3u8
+      path: /var/lib/libretime/hls
+
+  - enabled: true
+    url: https://radio.org/main
+    connection:
+      kind: icecast
+      host: localhost
+      port: 8000
+      mount: /main
+      username: source
+      password: hackme

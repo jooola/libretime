@@ -116,32 +116,17 @@ def cli(
     )
     wait_for_liquidsoap(liq_client)
 
-    fetch_queue: "Queue[Dict[str, Any]]" = Queue()
-    push_queue: "Queue[Events]" = Queue()
-    # This queue is shared between pypo-fetch and pypo-file, where pypo-file
-    # is the consumer. Pypo-fetch will send every schedule it gets to pypo-file
-    # and pypo will parse this schedule to determine which file has the highest
-    # priority, and retrieve it.
-    file_queue: "Queue[FileEvents]" = Queue()
+    logger.debug("creating working directories")
+    for dir_path in [CACHE_DIR, RECORD_DIR]:
+        dir_path.mkdir(exist_ok=True)
 
-    pypo_liquidsoap = PypoLiquidsoap(liq_client)
+    liquidsoap_version = get_liquidsoap_version()
+    logger.debug(f"found liquidsoap version {liquidsoap_version}")
 
-    PypoFile(file_queue, api_client).start()
+    if liquidsoap_version < LIQUIDSOAP_MIN_VERSION:
+        raise RuntimeError(f"unsupported liquidsoap version {liquidsoap_version}")
 
-    PypoFetch(
-        fetch_queue,
-        push_queue,
-        file_queue,
-        liq_client,
-        pypo_liquidsoap,
-        config,
-        api_client,
-        legacy_client,
-    ).start()
-
-    PypoPush(push_queue, pypo_liquidsoap, config).start()
-
-    StatsCollectorThread(config, legacy_client).start()
-
-    message_listener = MessageListener(config, fetch_queue)
-    message_listener.run_forever()
+    logger.debug("starting message handler")
+    with Connection(config.rabbitmq.url, heartbeat=5) as connection:
+        message_handler = MessageHandler(connection)
+        message_handler.run()

@@ -1,0 +1,176 @@
+# Icecast output
+###############################################################################
+
+{% for bitrate in mp3_bitrates %}
+{{ 'if' if loop.first else 'elsif' }} bitrate == {{ bitrate }} then
+
+%mp3(bitrate = {{ bitrate }}, stereo = true)
+{{ 'end' if loop.last }}
+{% endfor %}
+
+
+{% macro mp3(bitrate, mono=False) -%}
+{%- if mono -%}
+    %mp3(bitrate = {{ bitrate }}, stereo = true)
+{%- else -%}
+    %mp3(bitrate = {{ bitrate }}, stereo = false)
+{%- endif -%}
+{%- endmacro %}
+
+output.icecast(
+    id="output_icecast_{{ id }}",
+    protocol="{{ protocol }}",
+    host="{{ host }}",
+    port={{ port }},
+    password="{{ password }}",
+    mount="{{ mount }}",
+    fallible=true,
+
+    name="{{ name }}",
+    url="{{ url }}",
+    description="{{ description }}",
+    genre="{{ genre }}",
+)
+{%- endmacro %}
+
+
+
+
+def create_output_icecast(id, ~protocol, ~host, ~port, ~password, ~mount, ~name, ~url, ~description, ~genre) =
+
+
+
+    o = output.icecast(
+        id="output_icecast_{{ id }}",
+        protocol=protocol,
+        host=host,
+        port=port,
+        password=password,
+        mount=mount,
+        fallible=true,
+
+        name=name,
+        url=url,
+        description=description,
+        genre=genre,
+
+        on_connect=fun () -> begin output_icecast_on_connect("output_icecast_{{ id }}") end,
+        # on_error=icecast_on_error(id)
+    )
+    o
+end
+
+
+def output_to(output_type, type, bitrate, host, port, pass, mount_point, url, description, genre, user, s, stream, connected, name, channels) =
+
+
+    stereo = (channels == "stereo")
+
+
+
+
+
+        if type == "mp3" then
+            %include "mp3.liq"
+        end
+        if type == "ogg" then
+            %include "ogg.liq"
+        end
+
+        %ifencoder %opus
+        if type == "opus" then
+            %include "opus.liq"
+        end
+        %endif
+
+        %ifencoder %fdkaac
+        if type == "aac" then
+            %include "fdkaac.liq"
+        end
+        %endif
+    else
+        user_ref = ref user
+        if user == "" then
+            user_ref := "source"
+        end
+
+
+
+
+        if type == "mp3" then
+            %include "mp3.liq"
+        end
+
+        %ifencoder %fdkaac
+        if type == "aac" then
+            %include "fdkaac.liq"
+        end
+        %endif
+    end
+end
+
+{% macro create_output_icecast(id, protocol, host, port, password, mount, name, url, description, genre) -%}
+output.icecast(
+    id="output_icecast_{{ id }}",
+    protocol="{{ protocol }}",
+    host="{{ host }}",
+    port={{ port }},
+    password="{{ password }}",
+    mount="{{ mount }}",
+    fallible=true,
+
+    name="{{ name }}",
+    url="{{ url }}",
+    description="{{ description }}",
+    genre="{{ genre }}",
+)
+{%- endmacro %}
+
+
+def output_to(output_type, type, bitrate, host, port, pass, mount_point, url, description, genre, user, s, stream, connected, name, channels) =
+
+    source = ref s
+    def on_error(msg)
+        connected := "false"
+        gateway("stream '#{stream}' '#{!time}' --error='#{msg}'")
+        5.
+    end
+    def on_connect()
+        connected := "true"
+        gateway("stream '#{stream}' '#{!time}'")
+    end
+
+    output.icecast(
+        host = host,
+        port = port,
+        password = pass,
+        mount = mount_point,
+        fallible = true,
+        url = url,
+        description = description,
+        name = name,
+        genre = genre,
+        user = !user_ref,
+        on_error = on_error,
+        on_connect = on_connect,
+    )
+
+    if type == "mp3" then
+        %include "mp3.liq"
+    end
+    if type == "ogg" then
+        %include "ogg.liq"
+    end
+
+    %ifencoder %opus
+    if type == "opus" then
+        %include "opus.liq"
+    end
+    %endif
+
+    %ifencoder %fdkaac
+    if type == "aac" then
+        %include "fdkaac.liq"
+    end
+    %endif
+end

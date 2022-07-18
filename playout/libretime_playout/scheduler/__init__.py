@@ -2,7 +2,7 @@ from kombu.message import Message
 from loguru import logger
 
 
-class PlayerHandler:
+class SchedulerHandler:
     def __init__(self):
         pass
 
