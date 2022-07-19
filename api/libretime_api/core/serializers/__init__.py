@@ -1,6 +1,6 @@
 from .auth import LoginAttemptSerializer, UserTokenSerializer
-from .info import InfoSerializer, VersionSerializer
-from .preference import PreferenceSerializer
+from .info import StatusSerializer, VersionSerializer
+from .preference import PreferenceSerializer, StreamSettingSerializer
 from .service import ServiceRegisterSerializer
 from .stream import StreamPreferencesSerializer, StreamStateSerializer
 from .user import UserSerializer

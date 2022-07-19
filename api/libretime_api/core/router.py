@@ -7,8 +7,8 @@ from .views import (
     LoginAttemptViewSet,
     PreferenceViewSet,
     ServiceRegisterViewSet,
-    StreamPreferencesView,
-    StreamStateView,
+    StatusView,
+    StreamSettingViewSet,
     ThirdPartyTrackReferenceViewSet,
     UserTokenViewSet,
     UserViewSet,
@@ -26,7 +26,7 @@ router.register("third-party-track-references", ThirdPartyTrackReferenceViewSet)
 
 urls = [
     *router.urls,
-    path("info", InfoView.as_view()),
+    path("status", StatusView.as_view()),
     path("version", VersionView.as_view()),
     path("stream/preferences", StreamPreferencesView.as_view()),
     path("stream/state", StreamStateView.as_view()),
