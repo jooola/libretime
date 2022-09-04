@@ -205,7 +205,10 @@ class CeleryManager
     {
         $ref = $task->getThirdPartyTrackReferences();  // ThirdPartyTrackReferences join
         $service = CeleryServiceFactory::getService($ref->getDbService());
-        $service->updateTrackReference($task, $ref->getDbId(), json_decode($message->result), $message->status);
+
+        $result = is_string($message->result) ? json_decode($message->result) : $message->result;
+
+        $service->updateTrackReference($task, $ref->getDbId(), $result, $message->status);
     }
 
     /**

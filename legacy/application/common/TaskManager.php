@@ -60,6 +60,7 @@ final class TaskManager
     public function runTask($taskName)
     {
         $task = TaskFactory::getTask($taskName);
+        Logging::debug("checking if '{$taskName}' task should run");
         if ($task && $task->shouldBeRun()) {
             Logging::debug("running task {$taskName}");
             $task->run();
