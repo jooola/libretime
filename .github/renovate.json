@@ -23,7 +23,8 @@
     },
     {
       "matchPaths": ["website/**"],
-      "addLabels": ["javascript"]
+      "addLabels": ["javascript"],
+      "rangeStrategy": "update-lockfile"
     },
     {
       "matchUpdateTypes": ["patch"],
