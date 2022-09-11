@@ -8,6 +8,17 @@
   ],
   "labels": ["dependencies"],
   "prConcurrentLimit": 5,
+  "ignorePaths": [
+    ".github",
+    "analyzer",
+    "api",
+    "api-client",
+    "legacy",
+    "playout",
+    "shared",
+    "tools",
+    "worker"
+  ],
   "packageRules": [
     {
       "matchManagers": ["github-actions"],
