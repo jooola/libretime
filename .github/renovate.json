@@ -1,11 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base",
-    ":enablePreCommit",
-    ":preserveSemverRanges",
-    ":disableDependencyDashboard"
-  ],
+  "extends": ["config:base", ":enablePreCommit", ":preserveSemverRanges"],
   "labels": ["dependencies"],
   "prConcurrentLimit": 5,
   "ignorePaths": [
@@ -37,10 +32,6 @@
       "matchPaths": ["website/**"],
       "addLabels": ["javascript"],
       "prPriority": 10
-    },
-    {
-      "extends": "monorepo:docusaurus",
-      "groupName": "docusaurus monorepo"
     },
     {
       "matchUpdateTypes": ["patch"],
