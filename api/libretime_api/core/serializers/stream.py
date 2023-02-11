@@ -15,3 +15,10 @@ class StreamStateSerializer(serializers.Serializer):
     input_show_connected = serializers.BooleanField(read_only=True)
     input_show_streaming = serializers.BooleanField(read_only=True)
     schedule_streaming = serializers.BooleanField(read_only=True)
+
+
+# pylint: disable=abstract-method
+class StreamAuthSerializer(serializers.Serializer):
+    input = serializers.ChoiceField(["main", "show"])
+    username = serializers.CharField()
+    password = serializers.CharField()

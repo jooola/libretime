@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Optional
 
 from django.db import models
 from pydantic import BaseModel
@@ -16,12 +17,12 @@ class MessageFormatKind(int, Enum):
 
 class StreamPreferences(BaseModel):
     input_fade_transition: float
+    input_main_password: Optional[str]
+    input_main_username: Optional[str]
     message_format: MessageFormatKind
     message_offline: str
     # input_auto_switch_off: bool
     # input_auto_switch_on: bool
-    # input_main_user: str
-    # input_main_password: str
     # replay_gain_enabled: bool
     # replay_gain_offset: float
     # track_fade_in: float
@@ -82,6 +83,8 @@ class Preference(models.Model):
                 int(entries.get("stream_label_format") or 0)
             ),
             message_offline=entries.get("off_air_meta") or "Offline",
+            input_main_username=entries.get("live_stream_master_username"),
+            input_main_password=entries.get("live_stream_master_password"),
         )
 
     @classmethod

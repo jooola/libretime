@@ -1,3 +1,6 @@
+from datetime import datetime
+from typing import Optional
+
 from django.db import models
 
 
@@ -213,6 +216,17 @@ class ShowInstance(models.Model):
 
     def get_owner(self):
         return self.show.get_owner()
+
+    @classmethod
+    def get_current(cls, when: Optional[datetime] = None) -> "ShowInstance":
+        if when is None:
+            when = datetime.now()
+
+        return cls.objects.filter(
+            starts_at__lte=when,
+            ends_at__gt=when,
+            modified=False,
+        ).get()
 
     class Meta:
         managed = False
