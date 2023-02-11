@@ -36,6 +36,43 @@ class Podcast(models.Model):
         ]
 
 
+class StationPodcast(models.Model):
+    podcast = models.ForeignKey("Podcast", models.CASCADE)
+
+    def get_owner(self):
+        return self.podcast.owner
+
+    class Meta:
+        managed = False
+        db_table = "station_podcast"
+
+
+class ExternalPodcast(models.Model):
+    podcast = models.OneToOneField(
+        "Podcast",
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+
+    auto_ingest = models.BooleanField()
+    auto_ingested_at = models.DateTimeField(
+        db_column="auto_ingest_timestamp",
+        blank=True,
+        null=True,
+    )
+
+    override_album = models.BooleanField(
+        db_column="album_override",
+    )
+
+    def get_owner(self):
+        return self.podcast.owner
+
+    class Meta:
+        managed = False
+        db_table = "imported_podcast"
+
+
 class PodcastEpisode(models.Model):
     podcast = models.ForeignKey("podcasts.Podcast", on_delete=models.DO_NOTHING)
 
@@ -68,33 +105,3 @@ class PodcastEpisode(models.Model):
                 "Delete the episodes of podcasts where they are the owner",
             ),
         ]
-
-
-class StationPodcast(models.Model):
-    podcast = models.ForeignKey("podcasts.Podcast", on_delete=models.DO_NOTHING)
-
-    def get_owner(self):
-        return self.podcast.owner
-
-    class Meta:
-        managed = False
-        db_table = "station_podcast"
-
-
-class ImportedPodcast(models.Model):
-    podcast = models.ForeignKey("podcasts.Podcast", on_delete=models.DO_NOTHING)
-    override_album = models.BooleanField(db_column="album_override")
-
-    auto_ingest = models.BooleanField()
-    auto_ingested_at = models.DateTimeField(
-        blank=True,
-        null=True,
-        db_column="auto_ingest_timestamp",
-    )
-
-    def get_owner(self):
-        return self.podcast.owner
-
-    class Meta:
-        managed = False
-        db_table = "imported_podcast"

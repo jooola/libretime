@@ -29,6 +29,9 @@ setup(
         "django>=4.1.4,<4.2",
         "djangorestframework>=3.12.1,<3.15",
         "drf-spectacular>=0.22.1,<0.26",
+        "mutagen>=1.45.1",
+        "requests>=2.25.1,<2.29",
+        "typing_extensions",
     ],
     extras_require={
         "prod": [

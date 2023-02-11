@@ -13,8 +13,12 @@ export DJANGO_SETTINGS_MODULE=libretime_api.settings.testing
 
 format: .format
 lint: .format-check .pylint .mypy .bandit
-test: .pytest
-test-coverage: .coverage
+
+fixtures:
+	bash _fixtures/generate.sh
+
+test: fixtures .pytest
+test-coverage: fixtures .coverage
 clean: .clean
 
 SCHEMA_FILE ?= schema.yml
