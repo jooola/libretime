@@ -102,7 +102,7 @@ class DashboardController extends Zend_Controller_Action
 
     public function helpAction()
     {
-        Zend_Layout::getMvcInstance()->assign('parent_page', 'Help');
+        Zend_Layout::getMvcInstance()->assign('webapp_id', 'inject-dashboard-help');
     }
 
     public function aboutAction()

@@ -1,3 +1,19 @@
 {
-  "App.title": "You did it!"
+  "App": {
+    "title": "You did it!"
+  },
+  "views": {
+    "HelpView": {
+      "title": "Welcome to LibreTime!",
+      "steps": "Here's how you can get started using LibreTime to automate your broadcasts:",
+      "steps-upload-tracks": "Upload audio tracks",
+      "steps-upload-tracks-help": " Click the 'Upload' button in the left corner to upload tracks to your library.",
+      "steps-schedule-show": "Schedule a show",
+      "steps-schedule-show-help": "Click on 'Calendar' in the navigation bar on the left. From there click the '+ New Show' button and fill out the required fields.",
+      "steps-add-tracks-show": "Add tracks to your show",
+      "steps-add-tracks-show-help": "Click on your show in the calendar and select 'Schedule Show'. In the popup window drag tracks into your show.",
+      "steps-documentation": "Now you're good to go! For more detailed help, read the {documentation}.",
+      "steps-documentation-link": "documentation"
+    }
+  }
 }

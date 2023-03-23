@@ -7,9 +7,18 @@ import App from './App.vue'
 
 import './assets/main.css'
 
+// Vuetify
+import { createVuetify } from 'vuetify'
+
 const app = createApp(App)
 
 app.use(createPinia())
+
+const vuetify = createVuetify({
+  theme: { defaultTheme: 'dark' }
+})
+
+app.use(vuetify)
 
 app.use(
   createI18n({
@@ -18,4 +27,4 @@ app.use(
   })
 )
 
-app.mount('#app')
+app.mount('#inject-dashboard-help')

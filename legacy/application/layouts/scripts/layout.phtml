@@ -114,19 +114,28 @@
                                     echo "hidden";
                                 } ?>"><?php echo $hint; ?></div>
 
-    <div class="wrapper <?php if (isset($this->layout()->parent_page)) echo "wrapper_panel"; ?>" id="content">
-        <?php echo $this->layout()->content ?>
-    </div>
-    <?php if (isset($this->layout()->parent_page)) { ?>
-        <div id="sub-menu">
-            <h3><?php //parent_page is passed in from controller
-                echo _($this->layout()->parent_page); ?></h3>
-            <hr>
-            <?php
-            $page = $this->navigation()->findOneBy('title', $this->layout()->parent_page);
-            echo $this->navigation()->menu()->render($page);
-            ?>
+    <?php if (isset($this->layout()->webapp_id)) {  ?>
+
+        <div id="<?php echo $this->layout()->webapp_id; ?>" class="wrapper injection-container"></div>
+        <script type="module" src="http://localhost:5173/src/main.ts"></script>
+
+    <?php } else { ?>
+
+        <div class="wrapper <?php if (isset($this->layout()->parent_page)) echo "wrapper_panel"; ?>" id="content">
+            <?php echo $this->layout()->content ?>
         </div>
+        <?php if (isset($this->layout()->parent_page)) { ?>
+            <div id="sub-menu">
+                <h3><?php //parent_page is passed in from controller
+                    echo _($this->layout()->parent_page); ?></h3>
+                <hr>
+                <?php
+                $page = $this->navigation()->findOneBy('title', $this->layout()->parent_page);
+                echo $this->navigation()->menu()->render($page);
+                ?>
+            </div>
+        <?php } ?>
+
     <?php } ?>
 
     <script id="tmpl-pl-cues" type="text/template">

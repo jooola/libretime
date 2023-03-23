@@ -156,36 +156,7 @@ $pages[] = [
     'action' => 'help',
     'resource' => 'dashboard',
     'class' => '<i class="icon-question-sign icon-white"></i>',
-    'title' => 'Help',
-    'pages' => [
-        [
-            'label' => _('Getting Started'),
-            'module' => 'default',
-            'controller' => 'dashboard',
-            'action' => 'help',
-            'resource' => 'dashboard',
-        ],
-        [
-            'label' => _('User Manual'),
-            'uri' => USER_MANUAL_URL,
-            'target' => '_blank',
-        ],
-        [
-            'label' => _('Get Help Online'),
-            'uri' => LIBRETIME_DISCOURSE_URL,
-            'target' => '_blank',
-        ],
-        [
-            'label' => _('Contribute to LibreTime'),
-            'uri' => LIBRETIME_CONTRIBUTE_URL,
-            'target' => '_blank',
-        ],
-        [
-            'label' => _('What\'s New?'),
-            'uri' => LIBRETIME_WHATS_NEW_URL,
-            'target' => '_blank',
-        ],
-    ],
+    'title' => 'Help'
 ];
 
 // Create container from array
