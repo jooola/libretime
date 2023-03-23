@@ -25,6 +25,7 @@ jobs:
             playout
             shared
             ui
+            web
             worker
             deps
           subjectPattern: ^(?![A-Z]).+$
