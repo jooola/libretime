@@ -22,7 +22,7 @@ api_urls += storage_urls
 
 
 urlpatterns = [
-    path("api/browser/", include("rest_framework.urls", namespace="rest_framework")),
+    path("api/v2/browser/", include("rest_framework.urls", namespace="rest_framework")),
     path("api/v2/", include(api_urls)),
     path(
         "api/v2/schema",
